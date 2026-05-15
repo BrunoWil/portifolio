@@ -164,7 +164,7 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
 
     if let Some(body) = document.body() {
         body.set_inner_html(&body_html);
-        let _ = body.set_attribute("style", "");
+        let _ = body.set_attribute("class", "");
     }
 
     // 4. Adicionar event listeners para scroll suave após renderizar
