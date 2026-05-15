@@ -73,6 +73,7 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
             nav { background-color: var(--card-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
             .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
             .nav-links { display: flex; gap: 1.5rem; }
+            .nav-links { display: flex; gap: 1.5rem; white-space: nowrap; align-items: center; }
             .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: color 0.3s; }
             .nav-links a:hover { color: var(--primary); }
             section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
@@ -130,16 +131,21 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
         r##"
         <nav>
             <a href="#inicio" class="logo">{}.</a>
+            <a href="#inicio" class="logo" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView();">{}.</a>
             <div class="nav-links">
                 <a href="#inicio">Início</a>
                 <a href="#projetos">Projetos</a>
                 <a href="#contato">Contato</a>
+                <a href="#inicio" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView();">Início</a>
+                <a href="#projetos" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView();">Projetos</a>
+                <a href="#contato" onclick="event.preventDefault(); document.getElementById('contato').scrollIntoView();">Contato</a>
             </div>
         </nav>
         <section id="inicio">
             <h1>Olá, eu sou <span>{}</span></h1>
             <p>{}</p>
             <a href="#projetos" class="btn">Ver Meus Trabalhos</a>
+            <a href="#projetos" class="btn" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView();">Ver Meus Trabalhos</a>
         </section>
         <section id="projetos">
             <h2 class="section-title">Meus Projetos</h2>
