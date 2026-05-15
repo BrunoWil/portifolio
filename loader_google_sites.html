@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="margin: 0; display: flex; justify-content: center; align-items: center; height: 100%; font-family: sans-serif; background-color: #f8fafc; color: #64748b;">
+    <div id="status">Carregando portfólio...</div>
+
+    <script>
+        // Substitua pela URL "Raw" do seu arquivo portifolio.html no GitHub
+        const HTML_URL = "https://raw.githubusercontent.com/BrunoWil/SEU-REPO/main/portifolio.html";
+
+        fetch(HTML_URL)
+            .then(response => {
+                if (!response.ok) throw new Error("Erro de rede");
+                return response.text();
+            })
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(error => {
+                document.getElementById('status').innerText = "Erro ao carregar o site. Verifique o link do GitHub.";
+                console.error("Erro:", error);
+            });
+    </script>
+</body>
+</html>

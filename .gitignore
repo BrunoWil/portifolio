@@ -1,0 +1,25 @@
+# Ambientes Virtuais Python
+venv/
+.venv/
+env/
+
+# Arquivos de Cache e Compilados (Python)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.toml
+*.pdf
+*.py
+*.python-version
+
+# Variáveis de Ambiente / Segredos
+.env
+
+# Configurações de IDEs e Editores (VS Code, PyCharm, etc)
+.vscode/
+.idea/
+
+# Arquivos Ocultos de Sistema Operacional
+.DS_Store
+Thumbs.db
