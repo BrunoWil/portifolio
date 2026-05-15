@@ -30,7 +30,6 @@ struct PortfolioData {
     projetos: Vec<Projeto>,
 }
 
-// A macro `#[wasm_bindgen(start)]` executa automaticamente quando o Wasm for carregado no HTML.
 #[wasm_bindgen(start)]
 pub fn run() -> Result<(), JsValue> {
     spawn_local(async {
@@ -44,11 +43,9 @@ pub fn run() -> Result<(), JsValue> {
 async fn carregar_portfolio() -> Result<(), JsValue> {
     let url = "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/dados.json";
     
-    // Prevenção de cache
     let timestamp = js_sys::Date::now();
     let fetch_url = format!("{}?t={}", url, timestamp);
 
-    // Executa a requisição Fetch
     let response = Request::get(&fetch_url)
         .send()
         .await
@@ -62,7 +59,7 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
     let window = window().ok_or_else(|| JsValue::from_str("Janela global do navegador não encontrada."))?;
     let document = window.document().ok_or_else(|| JsValue::from_str("Documento não encontrado."))?;
 
-    // 1. Injetar o CSS global dinamicamente via Wasm
+    // 1. Injetar o CSS global corrigido
     if let Some(head) = document.head() {
         let style = document.create_element("style").map_err(|_| JsValue::from_str("Erro ao criar style"))?;
         style.set_inner_html(r#"
@@ -70,33 +67,52 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
             html { scroll-behavior: smooth; }
             body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
-            nav { background-color: var(--card-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
+            
+            /* Navbar Fixa e Segura */
+            nav { background-color: var(--card-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; width: 100%; }
             .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
             .nav-links { display: flex; gap: 1.5rem; white-space: nowrap; align-items: center; }
             .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: color 0.3s; }
             .nav-links a:hover { color: var(--primary); }
-            section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; scroll-margin-top: 80px; }
+            
+            /* Seções */
+            section { padding: 5rem 5%; width: 100%; max-width: 1200px; margin: 0 auto; scroll-margin-top: 80px; box-sizing: border-box; }
             .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 3rem; color: var(--text-main); position: relative; }
             .section-title::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--primary); margin: 10px auto 0; border-radius: 2px; }
+            
             #inicio { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-            #inicio h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+            #inicio h1 { font-size: 3.5rem; margin-bottom: 1rem; word-break: break-word; }
             #inicio h1 span { color: var(--primary); }
             #inicio p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2rem; }
+            
             .btn { background-color: var(--primary); color: white; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background-color 0.3s, transform 0.2s; border: none; cursor: pointer; display: inline-block; }
             .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
-            .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-            .project-card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+            
+            /* Grid de Projetos sem Quebras */
+            .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; width: 100%; }
+            .project-card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
             .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-            .project-img { width: 100%; height: 200px; background-color: #cbd5e1; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-weight: 600; }
-            .project-info { padding: 1.5rem; }
+            .project-img { width: 100%; height: 200px; background-color: #cbd5e1; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+            .project-info { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
             .project-info h3 { margin-bottom: 0.5rem; font-size: 1.3rem; }
+            .project-info p { color: var(--text-muted); flex-grow: 1; }
+            
             .tags { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
             .tag { background-color: #e2e8f0; color: #475569; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+            
             #contato { text-align: center; background-color: var(--card-bg); border-radius: 16px; padding: 4rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 3rem; }
             .contact-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
             .contact-links a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
-            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; }
-            @media (max-width: 768px) { #inicio h1 { font-size: 2.5rem; } .nav-links { display: none; } }
+            
+            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; width: 100%; }
+            
+            /* Responsividade Corrigida (Navbar não some, ela se adapta) */
+            @media (max-width: 768px) { 
+                nav { flex-direction: column; gap: 1rem; text-align: center; padding: 1rem; }
+                .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+                #inicio h1 { font-size: 2.3rem; } 
+                section { padding: 3rem 5%; }
+            }
         "#);
         let _ = head.append_child(&style);
     }
@@ -167,7 +183,8 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
 
     if let Some(body) = document.body() {
         body.set_inner_html(&body_html);
-        let _ = body.set_attribute("style", ""); // Limpa o estilo de centralização do body do loader
+        // Garante que o body use display flex vertical correto sem travas do loader anterior
+        let _ = body.set_attribute("style", "display: flex; flex-direction: column; margin: 0; padding: 0;"); 
     }
 
     Ok(())
