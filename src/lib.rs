@@ -66,6 +66,8 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
             :root { --primary: #2563eb; --primary-dark: #1d4ed8; --bg-color: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; --card-bg: #ffffff; }
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
             html { scroll-behavior: smooth; }
+            // body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; width: 100%; }
+            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; width: 100%; }
             body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
             nav { background-color: var(--card-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
             .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
@@ -92,7 +94,7 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
             #contato { text-align: center; background-color: var(--card-bg); border-radius: 16px; padding: 4rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 3rem; }
             .contact-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
             .contact-links a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
-            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; }
+            // footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; }
             @media (max-width: 768px) { #inicio h1 { font-size: 2.5rem; } .nav-links { display: none; } }
         "#);
         let _ = head.append_child(&style);
