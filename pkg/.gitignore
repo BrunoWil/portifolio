@@ -1,4 +1,4 @@
 *.json
-*.wasm*
+
 *.d*
 *.md
