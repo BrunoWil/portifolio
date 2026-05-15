@@ -56,18 +56,23 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
         .await
         .map_err(|e| JsValue::from_str(&e.to_string()))?;
 
-    let window = window().ok_or_else(|| JsValue::from_str("Janela global do navegador não encontrada."))?;
-    let document = window.document().ok_or_else(|| JsValue::from_str("Documento não encontrado."))?;
+    let window =
+        window().ok_or_else(|| JsValue::from_str("Janela global do navegador não encontrada."))?;
+    let document = window
+        .document()
+        .ok_or_else(|| JsValue::from_str("Documento não encontrado."))?;
 
     // 1. Injetar CSS global dinamicamente
     if let Some(head) = document.head() {
-        let style = document.create_element("style").map_err(|_| JsValue::from_str("Erro ao criar style"))?;
+        let style = document
+            .create_element("style")
+            .map_err(|_| JsValue::from_str("Erro ao criar style"))?;
         style.set_inner_html(r#"
             :root { --primary: #2563eb; --primary-dark: #1d4ed8; --bg-color: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; --card-bg: #ffffff; }
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-            html { scroll-behavior: smooth; }
-            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; width: 100%; }
-            body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+            html { scroll-behavior: smooth; height: auto; }
+            body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; width: 100%; margin: 0; padding: 0; }
+            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; width: 100%; box-sizing: border-box; }
             nav { background-color: var(--card-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
             .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
             .nav-links { display: flex; gap: 1.5rem; white-space: nowrap; align-items: center; }
@@ -101,7 +106,9 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
     // 2. Renderizar a grade de projetos
     let mut projetos_html = String::new();
     for proj in data.projetos {
-        let tags_html: String = proj.tags.iter()
+        let tags_html: String = proj
+            .tags
+            .iter()
             .map(|tag| format!("<span class=\"tag\">{}</span>", tag))
             .collect();
 
@@ -157,9 +164,16 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
             <p>&copy; {} {}. Todos os direitos reservados.</p>
         </footer>
         "##,
-        data.nome_completo, data.nome_curto, data.resumo, projetos_html,
-        data.contato.email, data.contato.email, data.contato.linkedin, data.contato.github,
-        ano, data.nome_completo
+        data.nome_completo,
+        data.nome_curto,
+        data.resumo,
+        projetos_html,
+        data.contato.email,
+        data.contato.email,
+        data.contato.linkedin,
+        data.contato.github,
+        ano,
+        data.nome_completo
     );
 
     if let Some(body) = document.body() {
@@ -187,9 +201,7 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
                 if let Some(target) = document_clone.get_element_by_id(&target_id) {
                     let options = web_sys::ScrollIntoViewOptions::new();
                     options.set_behavior(web_sys::ScrollBehavior::Smooth);
-                    target.scroll_into_view_with_scroll_into_view_options(
-                        &options,
-                    );
+                    target.scroll_into_view_with_scroll_into_view_options(&options);
                 }
             });
 
