@@ -10,12 +10,15 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.toml
 *.pdf
 *.py
 *.python-version
-*.rs
-*.html
+*.toml
+*.lock
+
+
+# Artefatos de compilação do Rust
+/target/
 
 # Variáveis de Ambiente / Segredos
 .env
