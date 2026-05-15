@@ -69,13 +69,13 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
             :root { --primary: #2563eb; --primary-dark: #1d4ed8; --bg-color: #f8fafc; --text-main: #0f172a; --text-muted: #64748b; --card-bg: #ffffff; }
             * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
             html { scroll-behavior: smooth; }
-            body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+            body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
             nav { background-color: var(--card-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; }
             .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
             .nav-links { display: flex; gap: 1.5rem; white-space: nowrap; align-items: center; }
             .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: color 0.3s; }
             .nav-links a:hover { color: var(--primary); }
-            section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+            section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; scroll-margin-top: 80px; }
             .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 3rem; color: var(--text-main); position: relative; }
             .section-title::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--primary); margin: 10px auto 0; border-radius: 2px; }
             #inicio { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
@@ -95,7 +95,7 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
             #contato { text-align: center; background-color: var(--card-bg); border-radius: 16px; padding: 4rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 3rem; }
             .contact-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
             .contact-links a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
-            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; }
+            footer { text-align: center; padding: 2rem; background-color: var(--text-main); color: white; margin-top: auto; }
             @media (max-width: 768px) { #inicio h1 { font-size: 2.5rem; } .nav-links { display: none; } }
         "#);
         let _ = head.append_child(&style);
@@ -129,17 +129,17 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
     let body_html = format!(
         r##"
         <nav>
-            <a href="#inicio" class="logo" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView();">{}.</a>
+            <a href="#inicio" class="logo" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView({{ behavior: 'smooth' }});">{}.</a>
             <div class="nav-links">
-                <a href="#inicio" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView();">Início</a>
-                <a href="#projetos" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView();">Projetos</a>
-                <a href="#contato" onclick="event.preventDefault(); document.getElementById('contato').scrollIntoView();">Contato</a>
+                <a href="#inicio" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView({{ behavior: 'smooth' }});">Início</a>
+                <a href="#projetos" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView({{ behavior: 'smooth' }});">Projetos</a>
+                <a href="#contato" onclick="event.preventDefault(); document.getElementById('contato').scrollIntoView({{ behavior: 'smooth' }});">Contato</a>
             </div>
         </nav>
         <section id="inicio">
             <h1>Olá, eu sou <span>{}</span></h1>
             <p>{}</p>
-            <a href="#projetos" class="btn" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView();">Ver Meus Trabalhos</a>
+            <a href="#projetos" class="btn" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView({{ behavior: 'smooth' }});">Ver Meus Trabalhos</a>
         </section>
         <section id="projetos">
             <h2 class="section-title">Meus Projetos</h2>
