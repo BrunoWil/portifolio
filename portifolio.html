@@ -290,7 +290,8 @@
 
         async function carregarPortfolio() {
             try {
-                const response = await fetch(API_URL);
+                // ?t=... força o navegador a buscar o arquivo novo em vez de usar o cache
+                const response = await fetch(`${API_URL}?t=${new Date().getTime()}`, { cache: "no-store" });
                 const portfolioData = await response.json();
 
                 document.getElementById('nav-logo').textContent = portfolioData.nomeCompleto + ".";

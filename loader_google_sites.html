@@ -10,7 +10,8 @@
         // Substitua pela URL "Raw" do seu arquivo portifolio.html no GitHub
         const HTML_URL = "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/portifolio.html";
 
-        fetch(HTML_URL)
+        // Adiciona um timestamp na URL e desativa o cache para forçar a versão mais recente
+        fetch(`${HTML_URL}?t=${new Date().getTime()}`, { cache: "no-store" })
             .then(response => {
                 if (!response.ok) throw new Error("Erro de rede");
                 return response.text();
