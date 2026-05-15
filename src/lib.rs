@@ -129,17 +129,17 @@ async fn carregar_portfolio() -> Result<(), JsValue> {
     let body_html = format!(
         r##"
         <nav>
-            <a href="#inicio" class="logo" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView({{ behavior: 'smooth' }});">{}.</a>
+            <a href="#inicio" class="logo" onclick="document.getElementById('inicio').scrollIntoView({{ behavior: 'smooth' }}); return false;">{}.</a>
             <div class="nav-links">
-                <a href="#inicio" onclick="event.preventDefault(); document.getElementById('inicio').scrollIntoView({{ behavior: 'smooth' }});">Início</a>
-                <a href="#projetos" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView({{ behavior: 'smooth' }});">Projetos</a>
-                <a href="#contato" onclick="event.preventDefault(); document.getElementById('contato').scrollIntoView({{ behavior: 'smooth' }});">Contato</a>
+                <a href="#inicio" onclick="document.getElementById('inicio').scrollIntoView({{ behavior: 'smooth' }}); return false;">Início</a>
+                <a href="#projetos" onclick="document.getElementById('projetos').scrollIntoView({{ behavior: 'smooth' }}); return false;">Projetos</a>
+                <a href="#contato" onclick="document.getElementById('contato').scrollIntoView({{ behavior: 'smooth' }}); return false;">Contato</a>
             </div>
         </nav>
         <section id="inicio">
             <h1>Olá, eu sou <span>{}</span></h1>
             <p>{}</p>
-            <a href="#projetos" class="btn" onclick="event.preventDefault(); document.getElementById('projetos').scrollIntoView({{ behavior: 'smooth' }});">Ver Meus Trabalhos</a>
+            <a href="#projetos" class="btn" onclick="document.getElementById('projetos').scrollIntoView({{ behavior: 'smooth' }}); return false;">Ver Meus Trabalhos</a>
         </section>
         <section id="projetos">
             <h2 class="section-title">Meus Projetos</h2>
