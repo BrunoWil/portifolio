@@ -3,6 +3,7 @@ venv/
 .venv/
 env/
 old/
+codigo_ignorado/
 
 # Arquivos de Cache e Compilados (Python)
 __pycache__/
