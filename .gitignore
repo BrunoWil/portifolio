@@ -4,6 +4,7 @@ venv/
 env/
 old/
 codigo_ignorado/
+src/
 
 # Arquivos de Cache e Compilados (Python)
 __pycache__/
