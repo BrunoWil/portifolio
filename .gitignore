@@ -5,7 +5,7 @@ env/
 old/
 codigo_ignorado/
 src/
-
+dist/
 # Arquivos de Cache e Compilados (Python)
 __pycache__/
 *.pyc
