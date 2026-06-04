@@ -17,7 +17,8 @@
         "Python",
         "FastAPI"
       ],
-      "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/sistemas_corporativos.png"
+      "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/sistemas_corporativos.png",
+      "link": ""
     },
     {
       "categoria": "Aplicativos Mobile",
@@ -28,7 +29,8 @@
         "Flutter",
         "Firebase"
       ],
-      "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/solucoes_moveis.png"
+      "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/solucoes_moveis.png",
+      "link": ""
     },
     {
       "categoria": "Infraestrutura e DevOps",
@@ -39,18 +41,21 @@
         "GitHub Actions",
         "PostgreSQL"
       ],
-      "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/infra_devops.png"
+      "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/infra_devops.png",
+      "link": ""
     },
     {
       "categoria": "Desenvolvimento Web / Privacidade",
       "titulo": "Removedor de Metadados (Wasm)",
       "descricao": "Ferramenta client-side de alto desempenho utilizando WebAssembly para remoção de metadados EXIF e informações sensíveis de arquivos de imagem, garantindo privacidade total dos dados.",
+      "link": "https://brunowil.github.io/removemetadados/",
       "tags": [
         "WebAssembly",
         "JavaScript",
         "Privacidade"
       ],
       "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/metadata_remover.png"
+      
     }
   ]
 }
