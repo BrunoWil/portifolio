@@ -12,22 +12,45 @@
       "categoria": "Sistemas Corporativos",
       "titulo": "Controle e Monitoramento",
       "descricao": "Desenvolvimento de sistemas corporativos para conferência de dados, processos e controle de estoques.",
-      "tags": ["Vue.js", "Python", "FastAPI"],
+      "tags": [
+        "Vue.js",
+        "Python",
+        "FastAPI"
+      ],
       "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/sistemas_corporativos.png"
     },
     {
       "categoria": "Aplicativos Mobile",
       "titulo": "Soluções Móveis",
       "descricao": "Desenvolvimento de aplicativos móveis inovadores utilizando metodologias de resolução de problemas reais.",
-      "tags": ["Dart", "Flutter", "Firebase"],
+      "tags": [
+        "Dart",
+        "Flutter",
+        "Firebase"
+      ],
       "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/solucoes_moveis.png"
     },
     {
       "categoria": "Infraestrutura e DevOps",
       "titulo": "Cloud & CI/CD",
       "descricao": "Implementação de práticas DevOps buscando otimização de fluxo e garantia da segurança da informação.",
-      "tags": ["AWS", "GitHub Actions", "PostgreSQL"],
+      "tags": [
+        "AWS",
+        "GitHub Actions",
+        "PostgreSQL"
+      ],
       "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/infra_devops.png"
+    },
+    {
+      "categoria": "Desenvolvimento Web / Privacidade",
+      "titulo": "Removedor de Metadados (Wasm)",
+      "descricao": "Ferramenta client-side de alto desempenho utilizando WebAssembly para remoção de metadados EXIF e informações sensíveis de arquivos de imagem, garantindo privacidade total dos dados.",
+      "tags": [
+        "WebAssembly",
+        "JavaScript",
+        "Privacidade"
+      ],
+      "imagem": "https://raw.githubusercontent.com/BrunoWil/Portifolio/master/assets/metadata_remover.png"
     }
   ]
 }
